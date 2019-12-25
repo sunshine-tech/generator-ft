@@ -61,9 +61,3 @@ class <%= Name %>Loaded extends <%= Name %>State {
   String toString() =>
       '<%= Name %>Loaded { <%= name %>s: ${<%= name %>s.length}, hasReachedMax: $hasReachedMax}';
 }
-
-class <%= Name %>Added extends <%= Name %>State {
-  final List<<%= Name %>> <%= name %>s;
-
-  <%= Name %>Added({this.<%= name %>s});
-}

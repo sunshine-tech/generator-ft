@@ -18,21 +18,6 @@ class <%= Name %>Bloc extends Bloc<<%= Name %>Event, <%= Name %>State> {
   @override
   Stream<<%= Name %>State> mapEventToState(<%= Name %>Event event) async* {
 
-    if (event is <%= Name %>EventListen<%= Name %>) {
-      var stream = await _<%= name %>Repository.listen<%= Name %>();
-      stream.listen((querySnapshot) {
-        var <%= name %>s = querySnapshot.documentChanges
-            .map((doc) =>
-                <%= Name %>.fromMap(doc.document.data, doc.document.documentID))
-            .toList();
-        add(<%= Name %>EventUpdate(<%= name %>s: <%= name %>s));
-      });
-    }
-
-    if (event is <%= Name %>EventUpdate) {
-      yield <%= Name %>Loaded(<%= name %>s: event.<%= name %>s);
-    }
-
     if (event is <%= Name %>EventFetch) {
       try {
         int firstIndex = 0;

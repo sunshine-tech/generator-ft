@@ -3,9 +3,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '<%= name %>_bloc.dart';
-import '<%= name %>_model.dart';
 import '<%= name %>_event.dart';
 import '<%= name %>_state.dart';
+import 'widgets/<%= name %>_bottom_loader_widget.dart';
+import 'widgets/<%= name %>_entry_widget.dart';
 
 class <%= Name %>Home extends StatefulWidget {
   <%= Name %>Home();
@@ -93,12 +94,13 @@ class _<%= Name %>HomeState extends State<<%= Name %>Home> {
       return ListView.builder(
         padding: kMaterialListPadding,
         itemCount: buildLen,
+//        controller: _scrollController,
         itemBuilder: (BuildContext context, int index) {
           if (index >= state.<%= name %>s.length && !state.isReachedMax()) {
             _<%= name %>Bloc.add(<%= Name %>EventFetch());
-            return BottomLoader();
+            return <%= Name %>BottomLoader();
           }
-          return <%= Name %>Widget(<%= name %>: state.<%= name %>s[index]);
+          return <%= Name %>EntryWidget(<%= name %>: state.<%= name %>s[index]);
         },
       );
     }
@@ -124,37 +126,4 @@ class _<%= Name %>HomeState extends State<<%= Name %>Home> {
   }
 }
 
-class BottomLoader extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Center(
-        child: SizedBox(
-          width: 33,
-          height: 33,
-          child: CircularProgressIndicator(
-            strokeWidth: 1.5,
-          ),
-        ),
-      ),
-    );
-  }
-}
 
-class <%= Name %>Widget extends StatelessWidget {
-  final <%= Name %> <%= name %>;
-  const <%= Name %>Widget({Key key, @required this.<%= name %>}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Text(
-        '${<%= name %>.id}',
-        style: TextStyle(fontSize: 16.0),
-      ),
-      title: Text(<%= name %>.title),
-      subtitle: Text(<%= name %>.body),
-    );
-  }
-}

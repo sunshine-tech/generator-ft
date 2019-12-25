@@ -54,10 +54,11 @@ module.exports = class extends Generator {
       return name;
     }
 
-    function copy(filename, folder) {
+    function copy(filename, folder, dstFolder) {
       var lowercaseName = that.props.name.toLowerCase();
       var destFileName = '';
       var srcFileName = filename;
+
       if (folder) {
         srcFileName = folder + '/' + filename;
       }
@@ -66,10 +67,13 @@ module.exports = class extends Generator {
       } else {
         destFileName = lowercaseName + filename;
       }
-
+      var dstFileName = `${lowercaseName}/${destFileName}`;
+      if (dstFolder) {
+        dstFileName = `${lowercaseName}/${dstFolder}/${destFileName}`;
+      }
       that.fs.copyTpl(
-        that.templatePath(`${srcFileName}`),
-        that.destinationPath(`${lowercaseName}/${destFileName}`),
+        that.templatePath(srcFileName),
+        that.destinationPath(dstFileName),
         {
           name: lowercaseName,
           Name: toClassName(lowercaseName)
@@ -87,6 +91,8 @@ module.exports = class extends Generator {
       copy('_repository_mock.dart', 'bloc');
       copy('_screen.dart', 'bloc');
       copy('_state.dart', 'bloc');
+      copy('_entry_widget.dart', 'bloc/widgets', 'widgets');
+      copy('_bottom_loader_widget.dart', 'bloc/widgets', 'widgets');
     }
 
     function create_widget() {

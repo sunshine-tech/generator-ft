@@ -28,11 +28,4 @@ class <%= Name %>RepositoryMock implements <%= Name %>Repository {
             body: rawPost['body']))
         .toList();
   }
-
-  @override
-  Future<Stream> listen<%= Name %>() {
-    // TODO: implement listen<%= Name %>
-    return null;
-  }
-
 }

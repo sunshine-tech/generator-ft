@@ -27,9 +27,3 @@ class <%= Name %>EventUpdate extends <%= Name %>Event {
   @override
   String toString() => '<%= Name %>EventUpdate $<%= name %>s';
 }
-
-class <%= Name %>EventListen<%= Name %> extends <%= Name %>Event {
-  <%= Name %>EventListen<%= Name %>();
-  @override
-  String toString() => 'Listen<%= Name %>';
-}
